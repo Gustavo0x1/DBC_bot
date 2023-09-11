@@ -9,11 +9,25 @@ import pyautogui
 from mss import mss
 
 from PIL import Image
+'''
+/
+Image input : 30fps
+68% Accurate, 3000 runs 
+
+
+Image input : 60fps;
+48% Accurate, 3000 runs 
+
+
+'''
+
+
 
 
 class ScrrenShotArea():
     def __init__(self):
         self.NumberOfActions = 0
+        self.MaxActions = 35
         self.ReadingHeight = 300
         #{'left': 160, 'top': 160, 'width': 200, 'height': 200}
         self.ScreenWidth = pyautogui.size()[0]
@@ -53,7 +67,7 @@ class ScrrenShotArea():
                     FoundImage = cv2.rectangle(np.array(img), pt, (self.Width, pt[1] + 30), (0, 0, 255), 2)   
                     cv2.imwrite('MatchResult.png',np.array(FoundImage))
                     pyautogui.click(pt[0]+11,pt[1]+9)
-                    if(self.NumberOfActions > 55):
+                    if(self.NumberOfActions > self.MaxActions):
                         return
                     self.NumberOfActions+=1
                     break
